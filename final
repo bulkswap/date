@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datum Berekening</title>
+</head>
+<body>
+
+<h1>Datum over 3 werkdagen:</h1>
+<p id="workdayDate"></p>
+
+<script>
+function addBusinessDays(daysToAdd) {
+    let date = new Date();
+    let dayOfWeek = date.getDay();
+    let daysAdded = 0;
+
+    while (daysAdded < daysToAdd) {
+        date.setDate(date.getDate() + 1);
+        dayOfWeek = date.getDay();
+
+        // Skip weekends (Saturday: 6, Sunday: 0)
+        if (dayOfWeek !== 6 && dayOfWeek !== 0) {
+            daysAdded++;
+        }
+    }
+
+    return date;
+}
+
+function formatDate(date) {
+    let day = date.getDate();
+    let month = date.getMonth() + 1; // Months are zero-indexed
+    let year = date.getFullYear();
+
+    return day + '/' + month + '/' + year;
+}
+
+let threeDaysFromNow = addBusinessDays(3);
+document.getElementById("workdayDate").innerText = formatDate(threeDaysFromNow);
+</script>
+
+</body>
+</html>
