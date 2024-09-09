@@ -7,8 +7,8 @@
 </head>
 <body>
 
-<h1>Datum over 3 werkdagen:</h1>
-<p id="workdayDate"></p>
+<h1>Uitbetalingsdatum:</h1>
+<p id="workdayMessage"></p>
 
 <script>
 function addBusinessDays(daysToAdd) {
@@ -29,16 +29,24 @@ function addBusinessDays(daysToAdd) {
     return date;
 }
 
-function formatDate(date) {
+function formatFullDate(date) {
+    const days = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+    const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+    
+    let dayName = days[date.getDay()];
     let day = date.getDate();
-    let month = date.getMonth() + 1; // Months are zero-indexed
-    let year = date.getFullYear();
+    let monthName = months[date.getMonth()]; // Months are zero-indexed
 
-    return day + '/' + month + '/' + year;
+    return dayName + " " + day + " " + monthName;
 }
 
 let threeDaysFromNow = addBusinessDays(3);
-document.getElementById("workdayDate").innerText = formatDate(threeDaysFromNow);
+let fullFormattedDate = formatFullDate(threeDaysFromNow);
+
+// Dynamically update the message
+document.getElementById("workdayMessage").innerText = 
+    "Breng je pakket vandaag nog naar een PostNL punt en krijg " + fullFormattedDate + " uitbetaald.";
+
 </script>
 
 </body>
