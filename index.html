@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datum Berekening</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <p id="workdayMessage"></p>
@@ -35,14 +43,15 @@ function formatFullDate(date) {
     let day = date.getDate();
     let monthName = months[date.getMonth()]; // Months are zero-indexed
 
-    return dayName + " " + day + " " + monthName;
+    // Return day and date in bold using span with class
+    return '<span class="bold">' + dayName + ' ' + day + ' ' + monthName + '</span>';
 }
 
 let threeDaysFromNow = addBusinessDays(3);
 let fullFormattedDate = formatFullDate(threeDaysFromNow);
 
-// Dynamically update the message
-document.getElementById("workdayMessage").innerText = 
+// Dynamically update the message with innerHTML to include bold text
+document.getElementById("workdayMessage").innerHTML = 
     "Breng je pakket vandaag nog naar een PostNL punt en krijg " + fullFormattedDate + " uitbetaald.";
 
 </script>
