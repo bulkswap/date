@@ -50,3 +50,12 @@ document.getElementById("workdayMessage").innerHTML =
     "Breng je pakket vandaag nog naar een PostNL punt en ontvang de uitbetaling uiterlijk op " + fullFormattedDate + " op je rekening.";
 
 </script>
+    <script>
+    function sendHeight() {
+        const height = document.body.scrollHeight;
+        window.parent.postMessage(height, '*');
+    }
+    window.onload = sendHeight;
+    window.onresize = sendHeight;
+</script>
+
