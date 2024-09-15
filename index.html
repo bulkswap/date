@@ -1,70 +1,65 @@
-<style>
-    body {
-        font-family: Verdana, sans-serif;
-        color: #0D016A; /* Set the font color here */
-    }
-    .bold {
-        font-weight: bold;
-    }
-</style>
-<style>
-    body {
-        font-family: Verdana, sans-serif;
-        color: #0D016A;
-        margin: 0; /* Remove default margin */
-        padding: 0; /* Remove default padding */
-    }
-</style>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            color: #0D016A; /* Set the font color here */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+        .bold {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-<p id="workdayMessage"></p>
+    <p id="workdayMessage"></p>
 
-<script>
-function addBusinessDays(daysToAdd) {
-    let date = new Date();
-    let dayOfWeek = date.getDay();
-    let daysAdded = 0;
-
-    while (daysAdded < daysToAdd) {
-        date.setDate(date.getDate() + 1);
-        dayOfWeek = date.getDay();
-
-        // Skip weekends (Saturday: 6, Sunday: 0)
-        if (dayOfWeek !== 6 && dayOfWeek !== 0) {
-            daysAdded++;
-        }
-    }
-
-    return date;
-}
-
-function formatFullDate(date) {
-    const days = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
-    const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
-    
-    let dayName = days[date.getDay()];
-    let day = date.getDate();
-    let monthName = months[date.getMonth()]; // Months are zero-indexed
-
-    // Return day and date in bold using span with class
-    return '<span class="bold">' + dayName + ' ' + day + ' ' + monthName + '</span>';
-}
-
-let threeDaysFromNow = addBusinessDays(3);
-let fullFormattedDate = formatFullDate(threeDaysFromNow);
-
-// Dynamically update the message with innerHTML to include bold text
-document.getElementById("workdayMessage").innerHTML = 
-    "Breng je pakket vandaag nog naar een PostNL punt en ontvang de uitbetaling uiterlijk op " + fullFormattedDate + " op je rekening.";
-
-</script>
     <script>
-    function sendHeight() {
-        const height = document.body.scrollHeight;
-        window.parent.postMessage(height, '*');
-    }
-    window.onload = sendHeight;
-    window.onresize = sendHeight;
-</script>
+        function addBusinessDays(daysToAdd) {
+            let date = new Date();
+            let dayOfWeek = date.getDay();
+            let daysAdded = 0;
 
+            while (daysAdded < daysToAdd) {
+                date.setDate(date.getDate() + 1);
+                dayOfWeek = date.getDay();
+
+                // Skip weekends (Saturday: 6, Sunday: 0)
+                if (dayOfWeek !== 6 && dayOfWeek !== 0) {
+                    daysAdded++;
+                }
+            }
+
+            return date;
+        }
+
+        function formatFullDate(date) {
+            const days = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+            const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+            
+            let dayName = days[date.getDay()];
+            let day = date.getDate();
+            let monthName = months[date.getMonth()]; // Months are zero-indexed
+
+            // Return day and date in bold using span with class
+            return '<span class="bold">' + dayName + ' ' + day + ' ' + monthName + '</span>';
+        }
+
+        let threeDaysFromNow = addBusinessDays(3);
+        let fullFormattedDate = formatFullDate(threeDaysFromNow);
+
+        // Dynamically update the message with innerHTML to include bold text
+        document.getElementById("workdayMessage").innerHTML = 
+            "Breng je pakket vandaag nog naar een PostNL punt en ontvang de uitbetaling uiterlijk op " + fullFormattedDate + " op je rekening.";
+
+        function sendHeight() {
+            const height = document.body.scrollHeight;
+            window.parent.postMessage(height, '*');
+        }
+        window.onload = sendHeight;
+        window.onresize = sendHeight;
+    </script>
+</body>
+</html>
